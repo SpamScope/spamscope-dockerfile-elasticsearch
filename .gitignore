@@ -1,0 +1,4 @@
+!conf/config.json
+.dockerignore
+conf/*
+topologies/*
