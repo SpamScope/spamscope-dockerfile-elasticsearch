@@ -52,22 +52,4 @@ $ sudo docker exec -ti spamscope /bin/bash
 
 ## Apache Storm settings
 
-It's possible change the default setting for all Apache Storm options. I suggest for SpamScope these options:
-
- - **topology.tick.tuple.freq.secs**: reload configuration of all bolts
- - **topology.max.spout.pending**: Apache Storm framework will then throttle your spout as needed to meet the `topology.max.spout.pending` requirement
- - **topology.sleep.spout.wait.strategy.time.ms**: max sleep for emit new tuple (mail)
-
-For SpamScope I tested these values to avoid failed tuples:
-
-```
-topology.tick.tuple.freq.secs: 60
-topology.max.spout.pending: 200
-topology.sleep.spout.wait.strategy.time.ms: 10
-```
-
-If Apache Tika is enabled:
-
-```
-topology.max.spout.pending: 100
-```
+For more details go to [SpamScope project](https://github.com/SpamScope/spamscope).
