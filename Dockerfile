@@ -1,6 +1,6 @@
 FROM fmantuano/apache-storm
 MAINTAINER Fedele Mantuano "mantuano.fedele@gmail.com"
-ENV REFRESHED_AT="2016-12-20" \
+ENV REFRESHED_AT="2016-12-21" \
     SPAMSCOPE_VER="v1.3rc4" \
     STORM_VER="1.0.2" \
     STREAMPARSE_VER="3.3.0" \
@@ -10,6 +10,7 @@ ENV FAUP_PATH="/opt/faup-master" \
     SPAMSCOPE_PATH="/opt/spamscope" \
     STORM_PATH="/opt/apache-storm-${STORM_VER}" \
     SPAMSCOPE_CONF_FILE="/etc/spamscope/spamscope.yml" \
+    V8_HOME="/opt/pyv8/build/v8_r19632" \
     WORKER_HEAP=1024
 LABEL description="Spamscope: Advanced Spam Analysis - Debug" \
     spamscope_version=${SPAMSCOPE_VER} \
@@ -68,11 +69,10 @@ RUN apt-get -yqq update \
     && apt-get -yqq purge \
         build-essential \
         cmake \
-        curl \
         dh-autoreconf \
         git \
         pkg-config \
         python-pip \
     && apt-get -yqq autoremove && dpkg -l |grep ^rc |awk '{print $2}' |xargs dpkg --purge
-COPY my_init.d/topology_submit.sh /opt/
-COPY my_init.d/99_template_submit.sh /etc/my_init.d/
+COPY scripts/topology_submit.sh /opt/
+COPY my_init.d/*.sh /etc/my_init.d/
