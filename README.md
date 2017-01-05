@@ -9,14 +9,14 @@ This image must be used with an elasticsearch container, where you'll save your 
   - Supervisor
   - Storm UI on port 8080
 
-run [SpamScope](https://github.com/SpamScope/spamscope) and submit the debug topology.
+run [SpamScope](https://github.com/SpamScope/spamscope) and submit the Elastisearch topology.
 
 SpamScope is an Advanced Spam Analyzer. For more details visit [GitHub project](https://github.com/SpamScope/spamscope).
 
 
 ## Usage
 
-To use spamscope-elasticsearch, you should start an elasticsearch container with `elastisearch` name, then you should connect it with the spamscope container.
+To use spamscope-elasticsearch, you should start an elasticsearch container, then you should connect it with the spamscope container.
 
 To create a new instance, with the right volumes of the configurations, use the following snippet:
 
@@ -30,7 +30,7 @@ Then you must submit elasticsearch topology:
 $ sudo docker exec -d spamscope /opt/topology_submit.sh
 ```
 
-If you want to change submit parameters, you should change the script in `my_init.d/topology_submit` and rebuild the image:
+If you want to change submit parameters, you should change the script in `scripts/topology_submit` and rebuild the image:
 
 ```
 $ sudo docker build --force-rm -t your_user/spamscope-elasticsearch .
