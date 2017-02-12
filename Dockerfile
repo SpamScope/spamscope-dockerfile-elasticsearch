@@ -1,15 +1,17 @@
 FROM fmantuano/apache-storm
 MAINTAINER Fedele Mantuano "mantuano.fedele@gmail.com"
-ENV REFRESHED_AT="2017-01-10" \
-    SPAMSCOPE_VER="v1.3" \
+ENV REFRESHED_AT="2017-02-12" \
+    SPAMSCOPE_VER="v1.4.0" \
     STORM_VER="1.0.2" \
-    STREAMPARSE_VER="3.3.0" \
+    STREAMPARSE_VER="3.4.0" \
+    THUG_ENABLED="True" \
     TIKA_APP_JAR_VER="1.14"
 ENV FAUP_PATH="/opt/faup-master" \
     LEIN_ROOT="yes" \
     SPAMSCOPE_PATH="/opt/spamscope" \
     STORM_PATH="/opt/apache-storm-${STORM_VER}" \
     SPAMSCOPE_CONF_FILE="/etc/spamscope/spamscope.yml" \
+    TIKA_APP_PATH="/opt/tika-app-${TIKA_APP_JAR_VER}.jar" \
     V8_HOME="/opt/pyv8/build/v8_r19632" \
     WORKER_HEAP=1024
 LABEL description="Spamscope: Advanced Spam Analysis - Elasticsearch" \
@@ -59,7 +61,7 @@ RUN apt-get -yqq update \
     && rm -rf /var/lib/apt/lists/* \
     && pip install wheel \
     && curl -o /opt/lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && chmod 755 /opt/lein && ln -s /opt/lein /usr/local/bin/lein && lein version \
-    && curl -o /opt/tika-app-${TIKA_APP_JAR_VER}.jar https://archive.apache.org/dist/tika/tika-app-${TIKA_APP_JAR_VER}.jar \
+    && curl -o ${TIKA_APP_PATH} https://archive.apache.org/dist/tika/tika-app-${TIKA_APP_JAR_VER}.jar \
     && sed -i "/worker.heap.memory.mb/cworker.heap.memory.mb: ${WORKER_HEAP}" $STORM_PATH/conf/storm.yaml \
     && git clone https://github.com/stricaud/faup.git ${FAUP_PATH} && mkdir -p $FAUP_PATH/build && cd $FAUP_PATH/build && cmake .. && make && make install && echo '/usr/local/lib' | tee -a /etc/ld.so.conf.d/faup.conf && ldconfig && cd $FAUP_PATH/src/lib/bindings/python && python setup.py install \
     && git clone https://github.com/VirusTotal/yara.git /opt/yara && cd /opt/yara && ./bootstrap.sh && ./configure && make && make install && pip install yara-python \
