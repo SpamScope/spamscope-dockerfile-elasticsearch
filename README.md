@@ -3,13 +3,10 @@
 **spamscope-dockerfile-elasticsearch** is a dockerfile to build [fmantuano/spamscope-elasticsearch](https://hub.docker.com/r/fmantuano/spamscope-elasticsearch/) Docker image.
 This image must be used with an elasticsearch container, where you'll save your analysis.
 
-**fmantuano/spamscope-elasticsearch** is an all-in-one [Apache Storm](http://storm.apache.org/) image that allows you to run a container with:
-  - Zookeeper
-  - Nimbus
-  - Supervisor
-  - Storm UI on port 8080
-
-run [SpamScope](https://github.com/SpamScope/spamscope) and submit the Elastisearch topology.
+**fmantuano/spamscope-elasticsearch** is an all-in-one  image that allows you to run a container with:
+  - [Apache Storm](http://storm.apache.org/)
+  - [SpamScope](https://github.com/SpamScope/spamscope)
+  - [Thug](https://github.com/buffer/thug)
 
 SpamScope is an Advanced Spam Analyzer. For more details visit [GitHub project](https://github.com/SpamScope/spamscope).
 
@@ -27,14 +24,11 @@ $ sudo docker run --name spamscope -p 8080:8080 -d -v /local/mails:/mnt/mails -v
 Then you must submit elasticsearch topology:
 
 ```
-$ sudo docker exec -d spamscope /opt/topology_submit.sh
+$ sudo docker exec -d spamscope spamscope-topology submit -g spamscope_elasticsearch
 ```
 
-If you want to change submit parameters, you should change the script in `scripts/topology_submit` and rebuild the image:
+Please check `spamscope-topology submit -h` for more details.
 
-```
-$ sudo docker build --force-rm -t your_user/spamscope-elasticsearch .
-```
 
 Once the docker instance is created, you can control it by running:
 

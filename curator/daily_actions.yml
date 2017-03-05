@@ -1,0 +1,61 @@
+# Remember, leave a key empty if there is no value.  None will be a string,
+# not a Python "NoneType"
+#
+# Also remember that all examples have 'disable_action' set to True.  If you
+# want to use this action as a template, be sure to set this to False after
+# copying it.
+actions:
+
+  # forcemerged all indices of yesterday
+  1:
+    action: forcemerge
+    description: >-
+      forceMerge all indices older than 1 days and younger than 2 segments per shard.  
+      Delay 120 seconds between each forceMerge operation to allow the cluster to quiesce.
+      This action will ignore indices already forceMerged to the same or fewer
+      number of segments per shard, so the 'forcemerged' filter is unneeded.
+    options:
+      continue_if_exception: True
+      delay: 120
+      disable_action: False
+      ignore_empty_list: True
+      max_num_segments: 1
+      timeout_override: 21600
+    filters:
+    - filtertype: age
+      source: name
+      direction: younger
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 2
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 1
+      exclude:
+
+  # delete spamscope indices (60 days)
+  2: 
+    action: delete_indices
+    description: >-
+      Delete indices older than 60 days, for jigen and fortinet_lab.
+      Ignore the error if the filter does not result in an
+      actionable list of indices (ignore_empty_list) and exit cleanly.
+    options:
+      disable_action: False
+      ignore_empty_list: True
+    filters:
+    - filtertype: pattern
+      kind: regex
+      value: (spamscope_*)
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 60
+      exclude:
