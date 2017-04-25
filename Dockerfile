@@ -1,4 +1,4 @@
-FROM fmantuano/spamscope-root:1.4.9
+FROM fmantuano/spamscope-root:1.4.10
 MAINTAINER Fedele Mantuano "mantuano.fedele@gmail.com"
 ENV REFRESHED_AT="2017-04-25"
 RUN apt-get -yqq update \
