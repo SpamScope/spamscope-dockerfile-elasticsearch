@@ -1,6 +1,6 @@
-FROM fmantuano/spamscope-root:1.4.10
+FROM fmantuano/spamscope-root:1.5.0
 MAINTAINER Fedele Mantuano "mantuano.fedele@gmail.com"
-ENV REFRESHED_AT="2017-04-25"
+ENV REFRESHED_AT="2017-05-19"
 RUN apt-get -yqq update \
     && apt-get -yqq --no-install-recommends install python-pip \
     && apt-get clean \
