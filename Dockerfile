@@ -1,4 +1,4 @@
-FROM fmantuano/spamscope-root
+FROM fmantuano/spamscope-root:develop
 MAINTAINER Fedele Mantuano "mantuano.fedele@gmail.com"
 RUN apt-get -yqq update \
     && apt-get -yqq --no-install-recommends install python-pip \
