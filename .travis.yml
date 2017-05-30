@@ -1,0 +1,46 @@
+sudo: required
+
+services:
+    - docker
+
+branches:
+    only:
+        - master
+        - develop
+
+before_install:
+
+    # make images
+    - if [ "$TRAVIS_BRANCH" == "master" ]; then
+        docker build -t $DOCKER_USERNAME/spamscope-elasticsearch .;
+      fi
+    - if [ "$TRAVIS_BRANCH" == "develop" ]; then
+        docker build -t $DOCKER_USERNAME/spamscope-elasticsearch:develop .;
+      fi
+
+# command to run tests
+script: 
+    - if [ "$TRAVIS_BRANCH" == "master" ]; then
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'for f in tests/test_*.py; do python "$f"; done';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'thug -V';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'spamscope-topology -v';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'spamscope-elasticsearch -v';
+      fi
+    - if [ "$TRAVIS_BRANCH" == "develop" ]; then
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'for f in tests/test_*.py; do python "$f"; done';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'thug -V';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'spamscope-topology -v';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'spamscope-elasticsearch -v';
+      fi
+
+after_success:
+    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    - if [ "$TRAVIS_BRANCH" == "master" ]; then
+        docker push $DOCKER_USERNAME/spamscope-elasticsearch;
+      fi
+    - if [ "$TRAVIS_BRANCH" == "develop" ]; then
+      docker push $DOCKER_USERNAME/spamscope-elasticsearch:develop;
+      fi
+
+notifications:
+    slack: spamscope:$SLACK_KEY
