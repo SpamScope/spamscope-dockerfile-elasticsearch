@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/SpamScope/spamscope-dockerfile-root.svg?branch=master)](https://travis-ci.org/SpamScope/spamscope-dockerfile-root)
+
 ![SpamScope](https://github.com/SpamScope/spamscope/blob/develop/docs/logo/spamscope.jpg?raw=true "SpamScope")
 
 **spamscope-dockerfile-elasticsearch** is a dockerfile to build [fmantuano/spamscope-elasticsearch](https://hub.docker.com/r/fmantuano/spamscope-elasticsearch/) Docker image.
