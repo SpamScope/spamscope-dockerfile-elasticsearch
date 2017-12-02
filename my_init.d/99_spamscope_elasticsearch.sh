@@ -1,5 +1,5 @@
 #!/bin/sh
 
-spamscope-elasticsearch template -p ${SPAMSCOPE_PATH}/conf/templates/spamscope.json -n spamscope
-spamscope-elasticsearch template -p ${SPAMSCOPE_PATH}/conf/templates/commons.json -n commons
-spamscope-elasticsearch replicas
+spamscope-elasticsearch -c elasticsearch template -p ${SPAMSCOPE_PATH}/conf/templates/spamscope.json -n spamscope
+spamscope-elasticsearch -c elasticsearch template -p ${SPAMSCOPE_PATH}/conf/templates/commons.json -n commons
+spamscope-elasticsearch -c elasticsearch replicas
