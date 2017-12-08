@@ -1,10 +1,7 @@
-FROM fmantuano/spamscope-root
+ARG SPAMSCOPE_VER="develop"
+FROM fmantuano/spamscope-root:${SPAMSCOPE_VER}
 MAINTAINER Fedele Mantuano "mantuano.fedele@gmail.com"
-RUN apt-get -yqq update \
-    && apt-get -yqq --no-install-recommends install python-pip \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install --ignore-installed elasticsearch-curator && mkdir -p /opt/curator
+RUN pip install --ignore-installed elasticsearch-curator && mkdir -p /opt/curator
 COPY curator/*.yml /opt/curator/
 COPY curator/daily_elk_maintanence.sh /etc/cron.daily/
 COPY my_init.d/*.sh /etc/my_init.d/
