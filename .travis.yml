@@ -16,10 +16,10 @@ before_install:
 
     # make images
     - if [ "$TRAVIS_BRANCH" == "master" ]; then
-        docker build --build-arg SPAMSCOPE_VER=latest -t $DOCKER_USERNAME/spamscope-elasticsearch .;
+        docker build --build-arg SPAMSCOPE_VER=master -t $DOCKER_USERNAME/spamscope-elasticsearch .;
       fi
     - if [ "$TRAVIS_BRANCH" == "develop" ]; then
-        docker build --build-arg SPAMSCOPE_VER=$TRAVIS_BRANCH -t $DOCKER_USERNAME/spamscope-elasticsearch:develop .;
+        docker build --build-arg SPAMSCOPE_VER=develop -t $DOCKER_USERNAME/spamscope-elasticsearch:develop .;
       fi
 
 # command to run tests
