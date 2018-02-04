@@ -26,7 +26,7 @@ RUN set -ex; \
     pip install -U thug;
 
 COPY curator/*.yml /opt/curator/
-COPY curator/00daily-elastic-maintanence /etc/cron.daily/
+COPY curator/00daily-elastic-maintenance /etc/cron.daily/
 COPY my_init.d/*.sh /etc/my_init.d/
     
 WORKDIR ${SPAMSCOPE_PATH}
