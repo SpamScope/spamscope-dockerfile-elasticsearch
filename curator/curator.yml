@@ -18,6 +18,6 @@ client:
   master_only: False
 
 logging:
-  loglevel: WARNING
+  loglevel: INFO
   logfile: /var/log/curator.log
   logformat: default
