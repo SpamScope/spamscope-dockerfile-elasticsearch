@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/SpamScope/spamscope-dockerfile-root.svg?branch=master)](https://travis-ci.org/SpamScope/spamscope-dockerfile-root)
+[![Build Status](https://travis-ci.org/SpamScope/spamscope-dockerfile-elasticsearch.svg?branch=master)](https://travis-ci.org/SpamScope/spamscope-dockerfile-elasticsearch)
 [![](https://images.microbadger.com/badges/image/fmantuano/spamscope-elasticsearch.svg)](https://microbadger.com/images/fmantuano/spamscope-elasticsearch "Get your own image badge on microbadger.com")
 
 ![SpamScope](https://github.com/SpamScope/spamscope/blob/develop/docs/logo/spamscope.jpg?raw=true "SpamScope")
