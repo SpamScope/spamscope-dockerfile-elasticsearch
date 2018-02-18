@@ -16,7 +16,7 @@ LABEL description="Spamscope: Advanced Spam Analysis" \
 
 # install SpamScope
 RUN set -ex; \
-    mkdir -p "/var/log/spamscope" "/etc/spamscope" "/opt/curator"; \
+    mkdir -p "/logs/spamscope" "/etc/spamscope" "/opt/curator"; \
     git clone -b ${SPAMSCOPE_VER} --single-branch https://github.com/SpamScope/spamscope.git ${SPAMSCOPE_PATH}; \
     cd $SPAMSCOPE_PATH; \
     pip install -r requirements_optional.txt; \
