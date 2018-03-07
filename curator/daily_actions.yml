@@ -41,7 +41,7 @@ actions:
   2: 
     action: delete_indices
     description: >-
-      Delete indices older than 60 days, for jigen and fortinet_lab.
+      Delete indices older than 60 days for SpamScope indices.
       Ignore the error if the filter does not result in an
       actionable list of indices (ignore_empty_list) and exit cleanly.
     options:
