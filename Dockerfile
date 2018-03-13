@@ -1,7 +1,5 @@
 FROM fmantuano/spamscope-deps
 
-MAINTAINER Fedele Mantuano "mantuano.fedele@gmail.com"
-
 # environment variables
 ARG SPAMSCOPE_VER="develop"
 
