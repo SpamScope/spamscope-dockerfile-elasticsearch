@@ -2,6 +2,7 @@ FROM fmantuano/spamscope-deps
 
 # environment variables
 ARG SPAMSCOPE_VER="develop"
+ARG CURATOR_VER="5.5.4"
 
 ENV SPAMASSASSIN_ENABLED="True" \
     SPAMSCOPE_CONF_FILE="/etc/spamscope/spamscope.yml" \
@@ -20,7 +21,7 @@ RUN set -ex; \
     pip install -r requirements_optional.txt; \
     python setup.py install; \
     sparse jar -s; \
-    pip install elasticsearch-curator==5.4.1 ;\
+    pip install elasticsearch-curator==${CURATOR_VER};\
     pip install -U thug;
 
 COPY curator/*.yml /opt/curator/
