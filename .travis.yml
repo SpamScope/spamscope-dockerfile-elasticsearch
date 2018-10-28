@@ -25,16 +25,16 @@ before_install:
 # command to run tests
 script:
     - if [ "$TRAVIS_BRANCH" == "master" ]; then
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'python -m unittest discover -f -s tests -f -v';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'thug -V';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'spamscope-topology -v';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'spamscope-elasticsearch -v';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'python -m unittest discover -s tests -f -v' &&
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'thug -V' &&
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'spamscope-topology -v' &&
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'spamscope-elasticsearch -v'
       fi
     - if [ "$TRAVIS_BRANCH" == "develop" ]; then
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'python -m unittest discover -f -s tests -f -v';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'thug -V';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'spamscope-topology -v';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'spamscope-elasticsearch -v';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'python -m unittest discover -s tests -f -v' &&
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'thug -V' &&
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'spamscope-topology -v' &&
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'spamscope-elasticsearch -v'
       fi
 
 after_success:
