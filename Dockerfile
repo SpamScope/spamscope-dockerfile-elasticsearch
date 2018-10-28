@@ -21,8 +21,7 @@ RUN set -ex; \
     pip install -r requirements_optional.txt; \
     python setup.py install; \
     sparse jar -s; \
-    pip install elasticsearch-curator==${CURATOR_VER};\
-    pip install --no-deps -U thug;
+    pip install elasticsearch-curator==${CURATOR_VER};
 
 COPY curator/*.yml /opt/curator/
 COPY curator/00daily-elastic-maintenance /etc/cron.daily/
