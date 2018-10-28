@@ -22,7 +22,7 @@ RUN set -ex; \
     python setup.py install; \
     sparse jar -s; \
     pip install elasticsearch-curator==${CURATOR_VER};\
-    pip install -U thug;
+    pip install --no-deps -U thug;
 
 COPY curator/*.yml /opt/curator/
 COPY curator/00daily-elastic-maintenance /etc/cron.daily/
