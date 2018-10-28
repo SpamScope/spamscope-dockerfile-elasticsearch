@@ -1,9 +1,8 @@
 FROM fmantuano/spamscope-deps
 
-MAINTAINER Fedele Mantuano "mantuano.fedele@gmail.com"
-
 # environment variables
 ARG SPAMSCOPE_VER="develop"
+ARG CURATOR_VER="5.5.4"
 
 ENV SPAMASSASSIN_ENABLED="True" \
     SPAMSCOPE_CONF_FILE="/etc/spamscope/spamscope.yml" \
@@ -22,8 +21,8 @@ RUN set -ex; \
     pip install -r requirements_optional.txt; \
     python setup.py install; \
     sparse jar -s; \
-    pip install elasticsearch-curator ;\
-    pip install -U thug;
+    pip install elasticsearch-curator==${CURATOR_VER};\
+    pip install --no-deps -U thug;
 
 COPY curator/*.yml /opt/curator/
 COPY curator/00daily-elastic-maintenance /etc/cron.daily/

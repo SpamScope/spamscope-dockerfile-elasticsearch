@@ -2,3 +2,4 @@
 .dockerignore
 conf/*
 topologies/*
+.*.swp
