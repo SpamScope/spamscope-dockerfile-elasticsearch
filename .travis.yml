@@ -25,16 +25,10 @@ before_install:
 # command to run tests
 script:
     - if [ "$TRAVIS_BRANCH" == "master" ]; then
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'python -m unittest discover -s tests -f -v';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'thug -V';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'spamscope-topology -v';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/sh -c 'spamscope-elasticsearch -v';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/bash -c 'python -m unittest discover -s tests -f -v && thug -V && spamscope-topology -v';
       fi
     - if [ "$TRAVIS_BRANCH" == "develop" ]; then
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'python -m unittest discover -s tests -f -v';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'thug -V';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'spamscope-topology -v';
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/sh -c 'spamscope-elasticsearch -v';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/bash -c 'python -m unittest discover -s tests -f -v && thug -V && spamscope-topology -v';
       fi
 
 after_success:
@@ -49,4 +43,4 @@ after_success:
 notifications:
     email: false
     slack:
-        secure: "PBpoOpt0dY4Uj4WdjnVF+KOo/ZRAmlmiEDR4Mal0LXj3DzEJWSw3j5vkoMHePXIEx7InqxB0RueVetB2SV4h+1jqMFZGfvOjW8A2CsalPNjd1LVlz2ETKqIuaS87cfSclf5o2lB+SKDEYMcLy/QgX+ZlJA7UR1PO7xwnIxpUzbENmchJwxx+SW01tJ8MFEFAKPVANPf7tK7mwDdRWoBsT1dfjve7CO4SeIvNQsi6L/qmSyogI/0aoe47KXaRhgOs0NGQI6Pjmzbamsm3CLm2/iwna9N0AIuz9tvuH/L8lav55bqSJmeQ7a+ZWjLiVKMhlLdEyPiq0f9e0MwpzDKFdmJ+RbkasI4GWs/E3zJtK/p2z31ZeK9S4BAL4wp73FrmkHP8MUGNAcVa3SJesIkzJ7kZUMF2lJUFHYMJw6ozbpK96HjPsx6WMAhQduxK9mNgO3c2R6mgMdHBaipu9vPJqp4TfxqtT5rclK+xfGAGsPpvWoNpYqqBKIYr1chT7k48jZuPkq3qg4gIgNDad1/pUbvejLR8gGZyHUZncXEZvnQcLjsk5wFhT083JR5MiFT+ZnSXWyy8ZJ+ATnSg/btUri00D3DxweKWkpAEoYxJz+7MiU5m8kriob+IEN4TFfFV28RXqSm13QLm+GrP9UjeaOPXZ7WE/nKNAbRm+ivhrP0="
+        secure: PBpoOpt0dY4Uj4WdjnVF+KOo/ZRAmlmiEDR4Mal0LXj3DzEJWSw3j5vkoMHePXIEx7InqxB0RueVetB2SV4h+1jqMFZGfvOjW8A2CsalPNjd1LVlz2ETKqIuaS87cfSclf5o2lB+SKDEYMcLy/QgX+ZlJA7UR1PO7xwnIxpUzbENmchJwxx+SW01tJ8MFEFAKPVANPf7tK7mwDdRWoBsT1dfjve7CO4SeIvNQsi6L/qmSyogI/0aoe47KXaRhgOs0NGQI6Pjmzbamsm3CLm2/iwna9N0AIuz9tvuH/L8lav55bqSJmeQ7a+ZWjLiVKMhlLdEyPiq0f9e0MwpzDKFdmJ+RbkasI4GWs/E3zJtK/p2z31ZeK9S4BAL4wp73FrmkHP8MUGNAcVa3SJesIkzJ7kZUMF2lJUFHYMJw6ozbpK96HjPsx6WMAhQduxK9mNgO3c2R6mgMdHBaipu9vPJqp4TfxqtT5rclK+xfGAGsPpvWoNpYqqBKIYr1chT7k48jZuPkq3qg4gIgNDad1/pUbvejLR8gGZyHUZncXEZvnQcLjsk5wFhT083JR5MiFT+ZnSXWyy8ZJ+ATnSg/btUri00D3DxweKWkpAEoYxJz+7MiU5m8kriob+IEN4TFfFV28RXqSm13QLm+GrP9UjeaOPXZ7WE/nKNAbRm+ivhrP0=
