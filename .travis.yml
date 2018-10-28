@@ -25,10 +25,10 @@ before_install:
 # command to run tests
 script:
     - if [ "$TRAVIS_BRANCH" == "master" ]; then
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/bash -c 'python -m unittest discover -s tests -f -v && thug -V';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch /bin/bash -c 'python -m unittest discover -s tests -f -v && thug -V && spamscope-topology -v';
       fi
     - if [ "$TRAVIS_BRANCH" == "develop" ]; then
-        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/bash -c 'python -m unittest discover -s tests -f -v && thug -V';
+        docker run --rm -it $DOCKER_USERNAME/spamscope-elasticsearch:develop /bin/bash -c 'python -m unittest discover -s tests -f -v && thug -V && spamscope-topology -v';
       fi
 
 after_success:
